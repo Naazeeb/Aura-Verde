@@ -106,7 +106,7 @@ button, input{ font-family: inherit; }
 }
 .brand__logo img{
   display: block;
-  height: 70px;
+  height: 50px;
   width: auto;
 }
 .brand__tag{
