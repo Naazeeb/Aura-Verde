@@ -22,21 +22,26 @@ const descriptionsById = {
 };
 
 function formatLevel(level) {
-  if (level === "principiante") return "facil";
-  if (level === "intermedio") return "intermedio";
+  if (level === "principiante") return "Fácil";
+  if (level === "intermedio") return "Intermedio";
   return level;
 }
 
 function formatLight(light) {
-  if (light === "baja-media") return "suave";
-  if (light === "media-alta") return "media/alta";
+  if (light === "baja-media") return "Suave";
+  if (light === "media-alta") return "Media/alta";
+  if (light === "media") return "Media";
+  if (light === "alta") return "Alta";
   return light;
 }
 
 function formatWater(watering) {
-  if (watering === "muy-bajo") return "minimo";
-  if (watering === "bajo-medio") return "bajo/medio";
-  if (watering === "medio-alto") return "medio/alto";
+  if (watering === "muy-bajo") return "Mínimo";
+  if (watering === "bajo-medio") return "Bajo/medio";
+  if (watering === "medio-alto") return "Medio/alto";
+  if (watering === "bajo") return "Bajo";
+  if (watering === "medio") return "Medio";
+  if (watering === "alto") return "Alto";
   return watering;
 }
 

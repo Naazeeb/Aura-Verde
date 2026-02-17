@@ -38,7 +38,7 @@ export default function Footer() {
 
         <hr className="hr" style={{ marginTop: 18 }} />
         <p className="small" style={{ margin: "14px 0 0" }}>
-          © {new Date().getFullYear()} Aura Verde · Proyecto demo (React).
+          © {new Date().getFullYear()} Aura Verde · Proyecto demo.
         </p>
       </div>
     </footer>

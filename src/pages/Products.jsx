@@ -163,22 +163,22 @@ export default function Products() {
 }
 
 function labelLight(v){
-  if (v === "baja-media") return "suave";
-  if (v === "media") return "media";
-  if (v === "media-alta") return "media/alta";
-  if (v === "alta") return "plena";
+  if (v === "baja-media") return "Suave";
+  if (v === "media") return "Media";
+  if (v === "media-alta") return "Media/alta";
+  if (v === "alta") return "Plena";
   return v;
 }
 function labelWater(v){
-  if (v === "muy-bajo") return "mínimo";
-  if (v === "bajo") return "bajo";
-  if (v === "medio") return "medio";
-  if (v === "alto") return "alto";
+  if (v === "muy-bajo") return "Mínimo";
+  if (v === "bajo") return "Bajo";
+  if (v === "medio") return "Medio";
+  if (v === "alto") return "Alto";
   return v;
 }
 function labelLevel(v){
-  if (v === "principiante") return "fácil";
-  if (v === "intermedio") return "intermedio";
+  if (v === "principiante") return "Fácil";
+  if (v === "intermedio") return "Intermedio";
   return v;
 }
 
