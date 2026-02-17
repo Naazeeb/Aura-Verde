@@ -80,6 +80,7 @@ export default function ProductCard({ product, onView }) {
         name={product.name}
         onClose={() => setAddedOpen(false)}
         onUndo={handleUndo}
+        onViewCart={() => setQuickOpen(false)}
       />
 
       <ProductQuickViewModal

@@ -2,7 +2,7 @@
 import { createPortal } from "react-dom";
 import { useStore } from "../context/store.js";
 
-export default function AddedModal({ open, name, onClose, onUndo }) {
+export default function AddedModal({ open, name, onClose, onUndo, onViewCart }) {
   const { openCart } = useStore();
   const [hovered, setHovered] = useState(false);
 
@@ -42,6 +42,7 @@ export default function AddedModal({ open, name, onClose, onUndo }) {
             <button
               className="btnSmall btnSmall--primary"
               onClick={() => {
+                onViewCart?.();
                 openCart();
                 onClose?.();
               }}

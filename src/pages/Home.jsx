@@ -443,6 +443,7 @@ export default function Home() {
         name={heroAdded.name}
         onClose={() => setHeroAdded({ open: false, name: "", id: null })}
         onUndo={handleHeroUndo}
+        onViewCart={() => setHeroQuickOpen(false)}
       />
 
       {isSceneViewerOpen && currentScene ? (
