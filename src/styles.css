@@ -131,6 +131,18 @@ button, input{ font-family: inherit; }
   align-items: center;
   gap: 10px;
 }
+.authBtn{
+  flex: unset;
+  padding: 8px 12px;
+}
+.authUser{
+  margin: 0;
+  white-space: nowrap;
+}
+.mobileAuthBtn{
+  width: 100%;
+  text-align: center;
+}
 .iconBtn{
   border: 1px solid rgba(28,42,35,.14);
   background: rgba(255,255,255,.45);
@@ -893,6 +905,28 @@ button, input{ font-family: inherit; }
 .modal p{ margin: 0 0 14px; color: var(--muted); line-height: 1.6; }
 .modalActions{ display:flex; gap: 10px; justify-content:flex-end; }
 
+/* Auth modal */
+.authModal{
+  width: min(520px, 94vw);
+  position: relative;
+}
+.authTabs{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.authTabs .chip{
+  flex: 1;
+  text-align: center;
+}
+.authForm{
+  display: grid;
+  gap: 10px;
+}
+.authForm .btnSmall{
+  margin-top: 4px;
+}
+
 /* Footer */
 .footer{
   padding: 34px 0;
@@ -970,6 +1004,7 @@ input:focus, textarea:focus{
   .productsLayout{ grid-template-columns: 1fr; }
   .productsTop{ align-items: flex-start; }
   .search{ width: 100%; }
+  .authBtn{ display: none; }
   .footerGrid{ grid-template-columns: 1fr; }
   .quickView{ grid-template-columns: 1fr; }
 }
@@ -1035,6 +1070,9 @@ input:focus, textarea:focus{
     width: min(540px, 95vw);
     padding: 14px;
   }
+  .authModal{
+    width: min(540px, 95vw);
+  }
   .modal--quick{
     width: min(860px, 95vw);
     max-height: 90vh;
@@ -1064,6 +1102,7 @@ input:focus, textarea:focus{
   .h2{ font-size: clamp(25px, 7vw, 34px); }
   .btnSmall{ padding: 10px; }
   .chip{ width: 100%; text-align: center; }
+  .authTabs .chip{ width: auto; }
   .drawerBtns{ flex-direction: column; }
   .modal--scene{
     padding: 10px 34px;

@@ -3,6 +3,7 @@ import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import CartDrawer from "./components/CartDrawer.jsx";
+import AuthModal from "./components/AuthModal.jsx";
 import Home from "./pages/Home.jsx";
 import About from "./pages/About.jsx";
 import Products from "./pages/Products.jsx";
@@ -29,6 +30,7 @@ export default function App() {
       </main>
       <Footer />
       <CartDrawer />
+      <AuthModal />
     </div>
   );
 }
