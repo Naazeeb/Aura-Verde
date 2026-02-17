@@ -415,7 +415,7 @@ export default function Home() {
               limpias para que la planta respire. Un gesto simple puede sostener
               lo vivo con serenidad.
             </p>
-            <button className="btn btn--primary" onClick={() => nav("/about")}>
+            <button className="btn btn--primary" onClick={() => nav("/about#una-nota-simple")}>
               Leer guía breve
             </button>
           </div>

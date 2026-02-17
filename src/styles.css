@@ -988,10 +988,14 @@ input:focus, textarea:focus{
     left: 10px;
     bottom: 56px;
     width: auto;
+    max-height: calc(100% - 118px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .heroCarousel__arrow{
     width: 30px;
     height: 30px;
+    top: 38%;
   }
   .heroCarousel__arrow--left{ left: 8px; }
   .heroCarousel__arrow--right{ right: 8px; }
@@ -1052,6 +1056,9 @@ input:focus, textarea:focus{
   .modal--scene{
     padding: 10px 34px;
     height: min(78vh, 620px);
+  }
+  .heroCarousel__arrow{
+    top: 34%;
   }
   .sceneNav{
     width: 32px;

@@ -1,6 +1,18 @@
-﻿import React from "react";
+﻿import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function About() {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (!hash) return;
+    const id = hash.replace("#", "");
+    const target = document.getElementById(id);
+    if (!target) return;
+    requestAnimationFrame(() => {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }, [hash]);
   const steps = [
     {
       title: "Leemos tu luz",
@@ -175,7 +187,7 @@ export default function About() {
         </div>
 
         {/* NOTA */}
-        <div className="card aboutNote">
+        <div className="card aboutNote" id="una-nota-simple">
           <div className="kicker">Una nota simple</div>
           <p className="p" style={{ margin: "10px 0 0", maxWidth: 980 }}>
             Si tenés poca luz, hay verdes que la abrazan. Si te olvidás de regar,
@@ -197,3 +209,4 @@ export default function About() {
     </section>
   );
 }
+
