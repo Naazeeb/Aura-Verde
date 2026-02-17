@@ -1,6 +1,6 @@
 ﻿import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { useStore } from "../context/StoreContext.jsx";
+import { useStore } from "../context/store.js";
 
 export default function AddedModal({ open, name, onClose, onUndo }) {
   const { openCart } = useStore();

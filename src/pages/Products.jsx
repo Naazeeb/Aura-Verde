@@ -85,7 +85,7 @@ export default function Products() {
           />
         </div>
 
-        <div style={{ marginTop: 18, display: "grid", gridTemplateColumns: "1.1fr .9fr", gap: 14, alignItems: "start" }}>
+        <div className="productsLayout" style={{ marginTop: 18 }}>
           <div className="card" style={{ padding: 18 }}>
             <div className="kicker">Filtros</div>
 

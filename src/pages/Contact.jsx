@@ -3,10 +3,22 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 
 const Schema = Yup.object().shape({
-  nombre: Yup.string().min(2, "Usá al menos 2 caracteres").required("Decinos tu nombre"),
-  apellido: Yup.string().min(2, "Usá al menos 2 caracteres").required("Decinos tu apellido"),
-  email: Yup.string().email("Revisá el formato del email").required("Dejanos un email"),
-  asunto: Yup.string().min(10, "Contanos un poquito más").required("Escribinos tu mensaje"),
+  nombre: Yup.string()
+    .min(2, "Usá al menos 2 caracteres")
+    .max(40, "Usá hasta 40 caracteres")
+    .required("Decinos tu nombre"),
+  apellido: Yup.string()
+    .min(2, "Usá al menos 2 caracteres")
+    .max(40, "Usá hasta 40 caracteres")
+    .required("Decinos tu apellido"),
+  email: Yup.string()
+    .email("Revisá el formato del email")
+    .max(120, "Usá hasta 120 caracteres")
+    .required("Dejanos un email"),
+  asunto: Yup.string()
+    .min(10, "Contanos un poquito más")
+    .max(500, "Usá hasta 500 caracteres")
+    .required("Escribinos tu mensaje"),
 });
 
 export default function Contact() {

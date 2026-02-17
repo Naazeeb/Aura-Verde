@@ -1,5 +1,5 @@
 ﻿import React, { useState } from "react";
-import { useStore } from "../context/StoreContext.jsx";
+import { useStore } from "../context/store.js";
 import { formatARS } from "../data/products.js";
 import AddedModal from "./AddedModal.jsx";
 import ProductQuickViewModal from "./ProductQuickViewModal.jsx";

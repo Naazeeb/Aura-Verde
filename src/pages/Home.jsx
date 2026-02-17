@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo, useState } from "react";
+﻿import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { collections, products } from "../data/products.js";
-import { useStore } from "../context/StoreContext.jsx";
+import { useStore } from "../context/store.js";
 import ProductCard from "../components/ProductCard.jsx";
 import ProductQuickViewModal from "../components/ProductQuickViewModal.jsx";
 import rinconCasa from "../assets/rincon_casa.jpg";
@@ -23,6 +23,7 @@ export default function Home() {
   const [heroIndex, setHeroIndex] = useState(0);
   const [pausedUntil, setPausedUntil] = useState(0);
   const [heroQuickOpen, setHeroQuickOpen] = useState(false);
+  const [sceneViewerIndex, setSceneViewerIndex] = useState(-1);
 
   useEffect(() => {
     if (heroItems.length <= 1) return undefined;
@@ -54,12 +55,57 @@ export default function Home() {
   };
 
   const closeHeroQuickView = () => setHeroQuickOpen(false);
+  const isSceneViewerOpen = sceneViewerIndex >= 0;
+  const currentScene = isSceneViewerOpen ? scenes[sceneViewerIndex] : null;
+
+  const openSceneViewer = (index) => {
+    setSceneViewerIndex(index);
+  };
+
+  const closeSceneViewer = () => {
+    setSceneViewerIndex(-1);
+  };
+
+  const goPrevScene = () => {
+    if (!scenes.length) return;
+    setSceneViewerIndex((prev) => (prev - 1 + scenes.length) % scenes.length);
+  };
+
+  const goNextScene = () => {
+    if (!scenes.length) return;
+    setSceneViewerIndex((prev) => (prev + 1) % scenes.length);
+  };
 
   const handleHeroAdd = () => {
     const current = heroItems[heroIndex];
     if (!current) return;
     addToCart(current, 1);
   };
+
+  useEffect(() => {
+    if (!isSceneViewerOpen) return undefined;
+
+    document.body.classList.add("noScroll");
+
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setSceneViewerIndex(-1);
+      }
+      if (e.key === "ArrowLeft") {
+        setSceneViewerIndex((prev) => (prev - 1 + scenes.length) % scenes.length);
+      }
+      if (e.key === "ArrowRight") {
+        setSceneViewerIndex((prev) => (prev + 1) % scenes.length);
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.classList.remove("noScroll");
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [isSceneViewerOpen, scenes.length]);
 
   const goProductsWithPreset = (preset) => {
     const params = new URLSearchParams();
@@ -184,43 +230,72 @@ export default function Home() {
       <section className="section section--tight">
         <div className="container">
           <div className="card ritual">
-            <div className="kicker">Ritual</div>
-            <h2 className="h2" style={{ marginTop: 6 }}>
-              Una curaduría botánica
-            </h2>
-            <p className="p" style={{ maxWidth: 760 }}>
-              Seleccionamos piezas botánicas para interiores, pensadas para
-              habitarse: con equilibrio, presencia y cuidado.
-            </p>
+            <div className="ritual__grid">
+              {/* IZQUIERDA */}
+              <div className="ritual__content">
+                <div className="kicker">Ritual</div>
 
-            <div
-              style={{
-                marginTop: 14,
-                display: "flex",
-                gap: 10,
-                flexWrap: "wrap",
-              }}
-            >
-              <button className="btn btn--primary" onClick={() => nav("/about")}>
-                Conocer Aura Verde
-              </button>
-              <button className="btn" onClick={() => nav("/contact")}>
-                Contacto
-              </button>
-            </div>
+                <h2 className="h2 ritual__title">Una curaduría botánica</h2>
 
-            <div className="pillars">
-              <div className="pillar">
-                <b>Luz</b>
-                <span>Entender tu espacio.</span>
+                <p className="p ritual__lead">
+                  Seleccionamos piezas botánicas para interiores, pensadas para
+                  habitarse: con equilibrio, presencia y cuidado.
+                </p>
+
+                <div className="ritual__actions">
+                  <button className="btn btn--primary" onClick={() => nav("/about")}>
+                    Conocer Aura Verde
+                  </button>
+                  <button className="btn" onClick={() => nav("/contact")}>
+                    Contacto
+                  </button>
+                </div>
+
+                <div className="trustbar">
+                  <span className="trustbar__item">Curaduría</span>
+                  <span className="trustbar__item">Envíos</span>
+                  <span className="trustbar__item">Cuotas</span>
+                  <span className="trustbar__item">Asesoría</span>
+                </div>
+
+                <div className="chipRow">
+                  <button className="chip" onClick={() => nav("/products?size=S")}>Pequeña</button>
+                  <button className="chip" onClick={() => nav("/products?size=M")}>Mediana</button>
+                  <button className="chip" onClick={() => nav("/products?size=L")}>Grande</button>
+                </div>
+
+                <div className="pillars">
+                  <div className="pillar">
+                    <b>Luz</b>
+                    <span>Entender tu espacio.</span>
+                  </div>
+                  <div className="pillar">
+                    <b>Ritmo</b>
+                    <span>Acompañar tu rutina.</span>
+                  </div>
+                  <div className="pillar">
+                    <b>Cuidado</b>
+                    <span>Sostener lo vivo.</span>
+                  </div>
+                </div>
               </div>
-              <div className="pillar">
-                <b>Ritmo</b>
-                <span>Acompañar tu rutina.</span>
-              </div>
-              <div className="pillar">
-                <b>Cuidado</b>
-                <span>Sostener lo vivo.</span>
+
+              {/* DERECHA */}
+              <div className="ritual__media">
+                
+                <div className="ritual__stack">
+                  <button className="stackCard" onClick={() => nav("/products?tag=terrarios")}>
+                    <p className="stackCard__tag">DESTACADO</p>
+                    <p className="stackCard__title">Terrarios</p>
+                    <p className="stackCard__meta">Verde profundo · Ritual húmedo</p>
+                  </button>
+
+                  <button className="stackCard" onClick={() => nav("/products?tag=faciles")}>
+                    <p className="stackCard__tag">FÁCIL</p>
+                    <p className="stackCard__title">Plantas resistentes</p>
+                    <p className="stackCard__meta">Baja luz · Poco riego</p>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -274,19 +349,24 @@ export default function Home() {
                 Escenas para habitar
               </h2>
               <p className="p" style={{ maxWidth: 720, marginBottom: 0 }}>
-                Pequeños rincones que cambian el aire de la casa, para que uses de inspiracion o para que te animes a crear el tuyo.
+                Pequeños rincones que cambian el aire de la casa, para que uses de inspiración o para que te animes a crear el tuyo.
               </p>
             </div>
           </div>
 
           <div className="grid4" style={{ marginTop: 18 }}>
-            {scenes.map((scene) => (
-              <div className="tile" key={scene.title}>
+            {scenes.map((scene, index) => (
+              <button
+                className="tile tile--button"
+                key={scene.title}
+                onClick={() => openSceneViewer(index)}
+                type="button"
+              >
                 <div className="tile__media">
                   <img src={scene.image} alt={scene.alt} />
                 </div>
                 <div className="tile__cap">{scene.title}</div>
-              </div>
+              </button>
             ))}
           </div>
         </div>
@@ -348,6 +428,52 @@ export default function Home() {
         onClose={closeHeroQuickView}
         onAdd={handleHeroAdd}
       />
+
+      {isSceneViewerOpen && currentScene ? (
+        <div
+          className="modalBackdrop modalBackdrop--scene isOpen"
+          onClick={closeSceneViewer}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Visor de escenas"
+        >
+          <div
+            className="modal modal--scene"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="iconBtn modal__close"
+              onClick={closeSceneViewer}
+              type="button"
+              aria-label="Cerrar visor"
+            >
+              ×
+            </button>
+
+            <button
+              className="sceneNav sceneNav--left"
+              onClick={goPrevScene}
+              type="button"
+              aria-label="Escena anterior"
+            >
+              {"<"}
+            </button>
+
+            <div className="sceneViewer__media">
+              <img src={currentScene.image} alt={currentScene.alt} />
+            </div>
+
+            <button
+              className="sceneNav sceneNav--right"
+              onClick={goNextScene}
+              type="button"
+              aria-label="Escena siguiente"
+            >
+              {">"}
+            </button>
+          </div>
+        </div>
+      ) : null}
     </>
   );
 }
@@ -360,5 +486,6 @@ function pickRandom(list, count) {
   }
   return copy.slice(0, count);
 }
+
 
 

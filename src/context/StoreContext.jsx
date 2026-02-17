@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { products } from "../data/products.js";
+import { StoreContext } from "./store.js";
 
-const StoreContext = createContext(null);
 const LS_KEY = "auraverde_cart_v1";
 const productsById = new Map(products.map((p) => [p.id, p]));
 
@@ -120,10 +120,4 @@ export function StoreProvider({ children }) {
   const value = useMemo(() => ({ ui, cart, ...actions }), [ui, cart, actions]);
 
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;
-}
-
-export function useStore() {
-  const ctx = useContext(StoreContext);
-  if (!ctx) throw new Error("useStore must be used inside StoreProvider");
-  return ctx;
 }

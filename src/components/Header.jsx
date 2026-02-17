@@ -1,6 +1,6 @@
 ﻿import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useStore } from "../context/StoreContext.jsx";
+import { useStore } from "../context/store.js";
 import logo from "../assets/logo.png";
 function CartIcon() {
   return (

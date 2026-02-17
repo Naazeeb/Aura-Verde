@@ -1,5 +1,5 @@
 ﻿import React, { useMemo, useState } from "react";
-import { useStore } from "../context/StoreContext.jsx";
+import { useStore } from "../context/store.js";
 import ConfirmModal from "./ConfirmModal.jsx";
 import { formatARS, products } from "../data/products.js";
 
